@@ -37,7 +37,7 @@ Open Windows PowerShell or CMD and start the automatic installer program, it wil
 cd Amazon-IT-Price-Tracker
 .\installer.bat
 ```
-![Windows Install GIF](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/main/images/WindowsInstall.gif)
+![Windows Install GIF](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.1/images/WindowsInstall.gif)
 
 ### MacOS / Linux
 
@@ -56,7 +56,7 @@ This file is the main settings file.
 
 1️⃣ Open settings.py file using text editor or IDE and fill in all fields. (for Telegram alert you need to create a BOT using @botfather)
 
-![Settings.py Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/main/images/settingsImage.png)
+![Settings.py Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.1/images/settingsImage.png)
 
 ### ASIN.json
 
@@ -64,11 +64,11 @@ This file contains all the Amazon IT products informations
 
 1️⃣ Find Amazon IT product unique ASIN code and copy it.
 
-![Amazon IT ASIN Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/main/images/ASIN_Image.png)
+![Amazon IT ASIN Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.1/images/ASIN_Image.png)
 
 2️⃣ Choose a price below which you want to be notified, choose the notification method and fill in the JSON file as below.
 
-![JSON file Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/main/images/json_image.png)
+![JSON file Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.1/images/json_image.png)
 
 This is an example with 3 products but you can add up to 10.000 products!
 
@@ -81,7 +81,7 @@ cd Amazon-IT-Price-Tracker
 python3 main.py
 ```
 
-![Main Menu Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/main/images/mainmenu_Image.png)
+![Main Menu Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.1/images/mainmenu_Image.png)
 
 if you see this screen probably you are on the right way. Just configure two more options and we are ready!
 
@@ -91,19 +91,19 @@ In order to make several requests in parallel, this software has a multi-thread 
 also the more CPU, RAM and I/O you will consume. If you have very powerful hardware/internet bandiwdth and want to have the greatest performance from this software, my advice is
 to set the number of threads equal to the number of product that you have filled in. If you have like thousands of products and speed is not a problem, my advice is to set the number
 of threads equal to double the number of CPU cores that you have.
-![Thread Setting Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/main/images/threadsetting_image.png)
+![Thread Setting Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.1/images/threadsetting_image.png)
 
 ### Delay Time Setting
 
 You can also configure the delay time in seconds between cycle of product monitoring tasks. My advice is that the perfect number is around 900 seconds.
-![Delay Setting Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/main/images/delaysetting_image.png)
+![Delay Setting Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.1/images/delaysetting_image.png)
 
 ### Products Scraping
 
 Once you have configured all the previous settings, Amazon IT Price Tracker will start to monitoring products for you. Directly on the console you can see real-time information for every product:
 request time, title and actual price.
 
-![Product Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/main/images/product_Image.png)
+![Product Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.1/images/product_Image.png)
 
 ## 📉 Alerts
 
@@ -114,21 +114,21 @@ When any monitored products' price drops under or equal to the selected target p
 If Telegram message alert is enabled for that specific product, you will see this message on the console.
  
  
-![Telegram Alert Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/main/images/telegramalert_Image.png)
+![Telegram Alert Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.1/images/telegramalert_Image.png)
  
 And then you will receive your message directly in chat.
  
-![Telegram Message Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/main/images/telegrammessage_Image.png)
+![Telegram Message Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.1/images/telegrammessage_Image.png)
 
 ### Email Alert
 
 If Email alert is enabled for that specific product, you will see this message on the console.
 
-![Email Alert Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/main/images/emailalert_Image.png)
+![Email Alert Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.1/images/emailalert_Image.png)
 
 And then you will receive your message directly in your email client.
 
-![Email Message Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/main/images/email_Image.png)
+![Email Message Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.1/images/email_Image.png)
 
 ## 👨‍💻 Support and Updates
 
