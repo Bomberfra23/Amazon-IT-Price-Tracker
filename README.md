@@ -6,6 +6,16 @@
 # ⚡️Amazon-IT-Price-Tracker ⚡️
 Multiplatform automated Amazon IT Price Tracker with several type of alerts and configurations
 
+## ⬆️ NEW UPDATE! V0.0.2 has been released!
+
+- Bug Fix
+
+- Up To 10% Improved Performance
+
+- Added Vendors And Ratings For Every Product
+
+- Added Alerts Testing Comand
+
 ---
 
 ## 📄 Disclaimer
