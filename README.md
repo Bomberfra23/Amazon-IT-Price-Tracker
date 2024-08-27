@@ -49,19 +49,18 @@ Open Windows PowerShell or CMD and start the automatic installer program, it wil
 
 ```shell
 cd Amazon-IT-Price-Tracker
-.\installer.bat
+.\setup.bat
 ```
 
 ![Windows Install GIF](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.1/images/WindowsInstall.gif)
 
 ### MacOS / Linux
 
-Use this shell commands to install all the dependencies.
-
+Open Terminal and start the automatic installer program, it will take care of everything for you.
 ```shell
 cd Amazon-IT-Price-Tracker
-pip install --upgrade pip
-pip install -r requirements.txt
+chmod +x setup.sh
+./setup.sh
 ```
 
 ## ⚙️ Configuration
