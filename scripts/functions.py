@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import datetime
 import json
 import logging
 import re
@@ -185,8 +184,6 @@ class AmazonScraper:
     @staticmethod
     def scrape_amazon_product(response: dict) -> Tuple[float | str, str, str, float]:
 
-        timestamp: str = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-
         if not response['error']:
 
             try:
@@ -239,7 +236,7 @@ class AmazonScraper:
     # Class method assigned to send Telegram notification using settings.py configuration
     @staticmethod
     def telegram_message(telegram_bot_token: str, telegram_chat_id: str, text: str) -> None:
-        timestamp: str = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
         api_call: str = f"https://api.telegram.org/bot{telegram_bot_token}/sendMessage"
 
         data = {
@@ -277,7 +274,6 @@ class AmazonScraper:
             text: str
     ) -> None:
 
-        timestamp = ""
         html_text = f"""   
   
         <html>
@@ -289,8 +285,6 @@ class AmazonScraper:
         """
 
         try:
-
-            timestamp: str = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             msg = MIMEMultipart()
             msg['From'] = from_email
             msg['To'] = to_email
@@ -332,7 +326,6 @@ class AmazonScraper:
 
 # function assigned to reading JSON file and extracting Amazon products, prices and alert configurations. Lists and dicts are initialized with those datas.
 def read_data() -> None:
-    timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     logger.info(f"Action: Starting...")
 
     try:
@@ -408,7 +401,6 @@ def get_delay_input() -> int:
 # functions assigned to check if alerts work properly
 
 def check_telegram_alert() -> None:
-    timestamp: str = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     value = input("Do You Want To Check If Telegram Alert Works Properly? [Y/n]  ")
 
     if value.isalpha() and value.lower() == 'y':
@@ -432,7 +424,6 @@ def check_telegram_alert() -> None:
 
 
 def check_email_alert() -> None:
-    timestamp: str = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     value = input("Do You Want To Check If Email Alert Works Properly? [Y/n]  ")
 
     if value.isalpha() and value.lower() == 'y':

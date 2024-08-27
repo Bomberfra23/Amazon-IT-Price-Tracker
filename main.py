@@ -5,7 +5,7 @@ import os
 import time
 
 from config import settings
-from scripts.GUI import logo
+from scripts.GUI import generate_logo
 from scripts.functions import (
     task,
     read_data,
@@ -18,6 +18,8 @@ from scripts.functions import (
     check_telegram_alert,
     check_email_alert
 )
+
+__version__ = 'ALPHA V0.0.2'
 
 formats = "[%(levelname) 4s/%(asctime)s] %(name)s: %(message)s"
 
@@ -38,7 +40,7 @@ logging.getLogger().setLevel(logging.ERROR)
 
 # main functions contains the main menu and thread's pool
 def main():
-    print(logo)
+    print(generate_logo(__version__, "Franco Pisani"))
     input("Press ENTER to starting configuration and reading data")
     read_data()
     number_of_threads = get_threads_input()
