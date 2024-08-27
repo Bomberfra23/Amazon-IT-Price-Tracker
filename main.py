@@ -19,14 +19,21 @@ from scripts.functions import (
     check_email_alert
 )
 
+formats = "[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s"
+
 logger = logging.getLogger("AmazonPriceTracker")
-logger.setLevel(logging.INFO)  # change to DEBUG for more detailed logs
+logger.setLevel(logging.INFO)
+
+console_handler = logging.StreamHandler()
+console_handler.setFormatter(logging.Formatter(formats))
+logger.addHandler(console_handler)
 
 if settings.SAVE_LOGS_TO_FILE:
-    formats = "[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s"
-    logger_handler = logging.FileHandler(f"{os.getcwd()}/logs.log")
-    logger_handler.setFormatter(logging.Formatter(formats))
-    logger.addHandler(logger_handler)
+    file_handler = logging.FileHandler(f"{os.getcwd()}/logs.log")
+    file_handler.setFormatter(logging.Formatter(formats))
+    logger.addHandler(file_handler)
+
+logging.getLogger().setLevel(logging.ERROR)
 
 
 # main functions contains the main menu and thread's pool
@@ -40,7 +47,7 @@ def main():
     check_email_alert()
     input("Press ENTER to starting monitoring products")
     timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    logger.info(f"[{timestamp}]  Action: Ready!")
+    logger.info(f"Action: Ready!")
 
     while True:
         start_time = time.time()
@@ -48,9 +55,13 @@ def main():
             executor.map(task, urls, price_targets, telegram_alerts_settings, email_alerts_settings)
             # parallelize product tasks using lists/dicts object as args
         timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        logger.info(f"[{timestamp}] Info: Tasks completed in: {int(time.time() - start_time)}")
+        logger.info(f"Tasks completed in: {int(time.time() - start_time)}")
         time.sleep(tasks_delay)  # delay between tasks
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        logger.info("Exiting...")
+        exit()
