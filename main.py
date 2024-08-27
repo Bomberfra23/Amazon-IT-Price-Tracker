@@ -24,7 +24,7 @@ logger.setLevel(logging.INFO)  # change to DEBUG for more detailed logs
 
 if settings.SAVE_LOGS_TO_FILE:
     formats = "[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s"
-    logger_handler = logging.FileHandler(f"{os.getcwd()}/ntgcalls.log")
+    logger_handler = logging.FileHandler(f"{os.getcwd()}/logs.log")
     logger_handler.setFormatter(logging.Formatter(formats))
     logger.addHandler(logger_handler)
 
