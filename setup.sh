@@ -29,14 +29,30 @@ if [[ ! $PYTHON_VERSION =~ Python\ 3\.[0-9]+\.[0-9]* ]]; then
     exit 1
 fi
 
-# Install the requirements
-if [ ! -f "requirements.txt" ]; then
-    echo "requirements.txt does not exist! Please try again."
+echo
+echo "Creating virtual environment..."
+# Create a virtual environment
+$PYTHON_CMD -m venv venv
+
+if [ ! -d "venv" ]; then
+    echo "Failed to create virtual environment! Please try again."
     exit 1
 fi
 
 echo
+echo "Activating virtual environment..."
+# Activate the virtual environment
+source venv/bin/activate
+
+echo
 echo "Upgrading pip and installing dependencies..."
+# Install the requirements
+if [ ! -f "requirements.txt" ]; then
+    echo "requirements.txt does not exist! Please try again."
+    deactivate  # Deactivate venv before exiting
+    exit 1
+fi
+
 pip install --upgrade pip
 pip install -r requirements.txt
 
