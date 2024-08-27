@@ -1,6 +1,6 @@
 # Telegram Alert settings
-TELEGRAM_BOT_TOKEN: str = "example" # use @botfather on Telegram
-TELEGRAM_CHAT_ID: str = "123456"   # use @chatIDrobot on Telegram
+TELEGRAM_BOT_TOKEN: str = "example" # use @BotFather on Telegram
+TELEGRAM_CHAT_ID: str = "123456"   # use @ChatIdRobot on Telegram
 
 # Email Alert settings
 EMAIL_SMTP_SERVER: str = "smtp.example.com"  
