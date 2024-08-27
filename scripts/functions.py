@@ -210,10 +210,12 @@ class AmazonScraper:
         if result['error'] or not result['data']['ok'] or result['status_code'] != 200:
 
             print(f"[{timestamp}]  Error: Unable to send Telegram Alert!")
+            return
 
         else:
 
             print(f"[{timestamp}]  Action: Telegram Alert sended!")
+            return
     
     # Class method assigned to send Email notification using settings.py configuration
     def email_message(self: classmethod, smtp_server: str, smtp_port: int, use_tls: bool, from_email: str, password: str, to_email: str, text: str) -> None: 
@@ -246,6 +248,7 @@ class AmazonScraper:
             server.quit()
 
             print(f"[{timestamp}]  Action: Email Alert sended!")
+            return
 
         except smtplib.SMTPAuthenticationError as e:
             print(f"[{timestamp}]  SMTP Server Authentication Email Alert Error: {e}")
@@ -300,24 +303,25 @@ def read_data() -> None:
 
 # function assigned to combine all the previous functions
 def task(url: str, price_target: float|str, telegram_alert_setting: bool, email_alert_setting: bool) -> None:
-     
-     headers: dict = {'User-Agent' : user_agent_rotator.get_random_user_agent(), "Accept" : "text/html"}
-     response = AmazonScraper(url).make_request(headers=headers)
-     price, title, vendor, rating = AmazonScraper(url).scrape_amazon_product(response)
+    global last_prices
+    headers: dict = {'User-Agent' : user_agent_rotator.get_random_user_agent(), "Accept" : "text/html"}
+    response = AmazonScraper(url).make_request(headers=headers)
+    price, title, vendor, rating = AmazonScraper(url).scrape_amazon_product(response)
+    previous_price = last_prices[url]
+    last_prices[url] = price
 
-     if type(price) == float and price<=price_target and (price<last_prices[url] or last_prices[url] == 0.0):
+    if type(price) == float and price<=price_target and (price<previous_price or previous_price == 0):
           
-          text = f"<b>{title}</b>\n\nRating: {rating} {int(round(rating))*'⭐️'}\nVendor: {vendor}\nStatus: Available ✅\nPrice: <b>{price}€</b> <del>{last_prices[url]}€</del>\n\n🔗Link: {url}"
-
-          if telegram_alert_setting:
+        text = f"<b>{title}</b>\n\nRating: {rating} {int(round(rating))*'⭐️'}\nVendor: {vendor}\nStatus: Available ✅\nPrice: <b>{price}€</b> <del>{last_prices[url]}€</del>\n\n🔗Link: {url}"
+        
+        if telegram_alert_setting:
               
-              AmazonScraper(url).telegram_message(TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, text)
+            AmazonScraper(url).telegram_message(TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, text)
 
-          if email_alert_setting:
+        if email_alert_setting:
               
-              AmazonScraper(url).email_message(EMAIL_SMTP_SERVER, EMAIL_PORT, EMAIL_USE_TLS, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, EMAIL_ADDRESSEE, text)
-
-     last_prices[url] = price
+            AmazonScraper(url).email_message(EMAIL_SMTP_SERVER, EMAIL_PORT, EMAIL_USE_TLS, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, EMAIL_ADDRESSEE, text)
+    
 
 # functions assigned to get user's input in the main page
 
