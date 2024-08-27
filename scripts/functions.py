@@ -411,7 +411,7 @@ def check_telegram_alert() -> None:
     timestamp: str = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     value = input("Do You Want To Check If Telegram Alert Works Properly? [Y/n]  ")
 
-    if value.isalpha() and value == 'Y':
+    if value.isalpha() and value.lower() == 'y':
         logger.info(f"Action: Checking Telegram API...")
         text = "Telegram Alert Service has been started ✅"
         (
@@ -423,7 +423,7 @@ def check_telegram_alert() -> None:
             )
         )
 
-    elif value.isalpha() and value == 'n':
+    elif value.isalpha() and value.lower() == 'n':
         logger.info(f"Action: Telegram API Check has been skipped")
 
     else:
@@ -435,7 +435,7 @@ def check_email_alert() -> None:
     timestamp: str = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     value = input("Do You Want To Check If Email Alert Works Properly? [Y/n]  ")
 
-    if value.isalpha() and value == 'Y':
+    if value.isalpha() and value.lower() == 'y':
         logger.info(f"Action: Checking Email Alert Service...")
         text = "Email Alert Service has been started ✅"
         (
@@ -450,7 +450,7 @@ def check_email_alert() -> None:
             )
         )
 
-    elif value.isalpha() and value == 'n':
+    elif value.isalpha() and value.lower() == 'n':
         logger.info(f"Action: Email Alert Service Check has been skipped")
 
     else:
