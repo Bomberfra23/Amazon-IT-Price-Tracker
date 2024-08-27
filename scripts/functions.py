@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import re
 import smtplib
 import sys
@@ -34,7 +35,7 @@ from config.settings import (
     EMAIL_HOST_USER,
     EMAIL_PORT,
     EMAIL_USE_TLS,
-    EMAIL_ADDRESSEE
+    EMAIL_ADDRESSEE, config_path
 )
 
 logger = logging.getLogger("AmazonPriceTracker")
@@ -379,10 +380,8 @@ def task(url: str, price_target: float | str, telegram_alert_setting: bool, emai
 
 def get_threads_input() -> int:
     value = input("Insert the number of threads:   ")
-
     if value.isnumeric() and int(value) > 0:
         return int(value)
-
     else:
         logger.info("Invalid Input! try again.")
         return get_threads_input()
@@ -390,20 +389,36 @@ def get_threads_input() -> int:
 
 def get_delay_input() -> int:
     value = input("Insert the number of seconds of delay:  ")
-
     if value.isnumeric() and int(value) >= 0:
         return int(value)
-
     else:
         logger.info("Invalid Input! try again.")
         return get_delay_input()
 
 
-# functions assigned to check if alerts work properly
+def save_user_inputs(threads: int, delay: int, telegram_check: bool, email_check: bool):
+    data = {
+        "threads": threads,
+        "delay": delay,
+        "telegram_check": telegram_check,
+        "email_check": email_check
+    }
+    with open(os.path.join(os.path.dirname(config_path), 'user_inputs.json'), 'w') as file:
+        json.dump(data, file, indent=4)
+    print(f"User inputs and checks have been saved to {os.path.join(os.path.dirname(config_path), 'user_inputs.json')}")
 
-def check_telegram_alert() -> None:
+
+def load_user_inputs():
+    try:
+        with open(os.path.join(os.path.dirname(config_path), 'user_inputs.json'), 'r') as file:
+            data = json.load(file)
+        return data["threads"], data["delay"], data["telegram_check"], data["email_check"]
+    except (FileNotFoundError, KeyError):
+        return None, None, None, None
+
+
+def check_telegram_alert() -> bool:
     value = input("Do You Want To Check If Telegram Alert Works Properly? [Y/n]  ")
-
     if value.isalpha() and value.lower() == 'y':
         logger.info(f"Action: Checking Telegram API...")
         text = "Telegram Alert Service has been started ✅"
@@ -415,18 +430,17 @@ def check_telegram_alert() -> None:
                 text
             )
         )
-
+        return True
     elif value.isalpha() and value.lower() == 'n':
         logger.info(f"Action: Telegram API Check has been skipped")
-
+        return False
     else:
         logger.info("Invalid Input! try again.")
         return check_telegram_alert()
 
 
-def check_email_alert() -> None:
+def check_email_alert() -> bool:
     value = input("Do You Want To Check If Email Alert Works Properly? [Y/n]  ")
-
     if value.isalpha() and value.lower() == 'y':
         logger.info(f"Action: Checking Email Alert Service...")
         text = "Email Alert Service has been started ✅"
@@ -441,10 +455,10 @@ def check_email_alert() -> None:
                 EMAIL_ADDRESSEE, text
             )
         )
-
+        return True
     elif value.isalpha() and value.lower() == 'n':
         logger.info(f"Action: Email Alert Service Check has been skipped")
-
+        return False
     else:
         logger.info("Invalid Input! try again.")
         return check_email_alert()

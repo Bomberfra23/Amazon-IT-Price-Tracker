@@ -18,3 +18,7 @@ EMAIL_USE_TLS = strtobool(os.getenv("EMAIL_USE_TLS", "true"))
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "sender@example.com")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "password")
 EMAIL_ADDRESSEE = os.getenv("EMAIL_ADDRESSEE", "addressee@example.com")
+
+
+# Config Path
+config_path= f"{os.getcwd()}/config/"
