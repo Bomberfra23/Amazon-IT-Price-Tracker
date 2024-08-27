@@ -1,23 +1,23 @@
 {
-    "amazon_it_products" : [
-        {
-            "ASIN" : "B0CHX4JFT6",
-            "price_target" : 1100.00,
-            "telegram_alert" : true,
-            "email_alert" : true
-        },
-        {
-            "ASIN" : "B0BPTKD797",
-            "price_target" : 115.00,
-            "telegram_alert" : false,                
-            "email_alert" : false
-        },
-        {
-            "ASIN" : "B0BZHTVHN5",
-            "price_target" : 105.00,
-            "telegram_alert" : true,
-            "email_alert" : false
-        }
-            ]
+  "amazon_it_products": [
+    {
+      "ASIN": "B0CHX4JFT6",
+      "price_target": 1100.00,
+      "telegram_alert": true,
+      "email_alert": true
+    },
+    {
+      "ASIN": "B0BPTKD797",
+      "price_target": 115.00,
+      "telegram_alert": false,
+      "email_alert": false
+    },
+    {
+      "ASIN": "B0BZHTVHN5",
+      "price_target": 105.00,
+      "telegram_alert": true,
+      "email_alert": false
+    }
+  ]
 }
         
