@@ -1,11 +1,12 @@
 from __future__ import annotations
 
-import datetime
 import json
 import logging
+import os
 import re
 import smtplib
 import sys
+from datetime import datetime
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from typing import Tuple
@@ -34,7 +35,7 @@ from config.settings import (
     EMAIL_HOST_USER,
     EMAIL_PORT,
     EMAIL_USE_TLS,
-    EMAIL_ADDRESSEE
+    EMAIL_ADDRESSEE, config_path
 )
 
 logger = logging.getLogger("AmazonPriceTracker")
@@ -185,8 +186,6 @@ class AmazonScraper:
     @staticmethod
     def scrape_amazon_product(response: dict) -> Tuple[float | str, str, str, float]:
 
-        timestamp: str = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-
         if not response['error']:
 
             try:
@@ -226,20 +225,20 @@ class AmazonScraper:
 
                     rating = 0
 
-                logger.info(f"[{timestamp}]  Object: {title}  Price: {price}€  Vendor: {vendor}  Rating: {rating}")
+                logger.info(f"Object: {title}  Price: {price}€  Vendor: {vendor}  Rating: {rating}")
                 return price, title, vendor, rating
 
             except Exception as error:  # errors handling
-                logger.info(f"[{timestamp}]  Generic Scraping Data Error: {error}")
+                logger.info(f"Generic Scraping Data Error: {error}")
 
         else:
-            logger.info(f"[{timestamp}] HTTP Error: {response['error']}")
+            logger.info(f"HTTP Error: {response['error']}")
             return "HTTP Error", "HTTP Error", "HTTP Error", 0.0
 
     # Class method assigned to send Telegram notification using settings.py configuration
     @staticmethod
     def telegram_message(telegram_bot_token: str, telegram_chat_id: str, text: str) -> None:
-        timestamp: str = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
         api_call: str = f"https://api.telegram.org/bot{telegram_bot_token}/sendMessage"
 
         data = {
@@ -258,11 +257,11 @@ class AmazonScraper:
         )  # makes request to Telegram API Server
 
         if result['error'] or not result['data']['ok'] or result['status_code'] != 200:
-            logger.info(f"[{timestamp}]  Error: Unable to send Telegram Alert!")
+            logger.info(f"Error: Unable to send Telegram Alert!")
             return
 
         else:
-            logger.info(f"[{timestamp}]  Action: Telegram Alert sent!")
+            logger.info(f"Action: Telegram Alert sent!")
             return
 
     # Class method assigned to send Email notification using settings.py configuration
@@ -277,7 +276,6 @@ class AmazonScraper:
             text: str
     ) -> None:
 
-        timestamp = ""
         html_text = f"""   
   
         <html>
@@ -289,8 +287,6 @@ class AmazonScraper:
         """
 
         try:
-
-            timestamp: str = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             msg = MIMEMultipart()
             msg['From'] = from_email
             msg['To'] = to_email
@@ -305,35 +301,34 @@ class AmazonScraper:
             server.sendmail(from_email, to_email, text)
             server.quit()
 
-            logger.info(f"[{timestamp}]  Action: Email Alert sent!")
+            logger.info(f"Action: Email Alert sent!")
             return
 
         except smtplib.SMTPAuthenticationError as e:
-            logger.info(f"[{timestamp}]  SMTP Server Authentication Email Alert Error: {e}")
+            logger.info(f"SMTP Server Authentication Email Alert Error: {e}")
 
         except smtplib.SMTPConnectError as e:
-            logger.info(f"[{timestamp}]  SMTP Server Connection Email Alert Error: {e}")
+            logger.info(f"SMTP Server Connection Email Alert Error: {e}")
 
         except smtplib.SMTPRecipientsRefused as e:
-            logger.info(f"[{timestamp}]  Address Refused Email Alert Error: {e}")
+            logger.info(f"Address Refused Email Alert Error: {e}")
 
         except smtplib.SMTPDataError as e:
-            logger.info(f"[{timestamp}]  Data Email Alert Error: {e}")
+            logger.info(f"Data Email Alert Error: {e}")
 
         except smtplib.SMTPServerDisconnected as e:
-            logger.info(f"[{timestamp}]  SMTP Server Disconnected Email Alert Error: {e}")
+            logger.info(f"SMTP Server Disconnected Email Alert Error: {e}")
 
         except smtplib.SMTPException as e:
-            logger.info(f"[{timestamp}]  Generic SMTP Server Email Alert Error: {e}")
+            logger.info(f"Generic SMTP Server Email Alert Error: {e}")
 
         except Exception as error:
-            logger.info(f"[{timestamp}]  Generic Email Alert Error: {error}")
+            logger.info(f"Generic Email Alert Error: {error}")
 
 
 # function assigned to reading JSON file and extracting Amazon products, prices and alert configurations. Lists and dicts are initialized with those datas.
 def read_data() -> None:
-    timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    logger.info(f"[{timestamp}]  Action: Starting...")
+    logger.info(f"Action: Starting...")
 
     try:
 
@@ -353,10 +348,10 @@ def read_data() -> None:
             telegram_alerts_settings.append(telegram_alert_setting)
             email_alerts_settings.append(email_alert_setting)
 
-        logger.info(f"[{timestamp}]  Action: Successfully loaded {len(urls)} Amazon IT Products!")
+        logger.info(f"Action: Successfully loaded {len(urls)} Amazon IT Products!")
 
     except Exception as error:
-        logger.info(f"[{timestamp}]  Generic Error: {error}")
+        logger.info(f"Generic Error: {error}")
         sys.exit()
 
 
@@ -385,10 +380,8 @@ def task(url: str, price_target: float | str, telegram_alert_setting: bool, emai
 
 def get_threads_input() -> int:
     value = input("Insert the number of threads:   ")
-
     if value.isnumeric() and int(value) > 0:
         return int(value)
-
     else:
         logger.info("Invalid Input! try again.")
         return get_threads_input()
@@ -396,23 +389,38 @@ def get_threads_input() -> int:
 
 def get_delay_input() -> int:
     value = input("Insert the number of seconds of delay:  ")
-
     if value.isnumeric() and int(value) >= 0:
         return int(value)
-
     else:
         logger.info("Invalid Input! try again.")
         return get_delay_input()
 
 
-# functions assigned to check if alerts work properly
+def save_user_inputs(threads: int, delay: int, telegram_check: bool, email_check: bool):
+    data = {
+        "threads": threads,
+        "delay": delay,
+        "telegram_check": telegram_check,
+        "email_check": email_check
+    }
+    with open(os.path.join(os.path.dirname(config_path), 'user_inputs.json'), 'w') as file:
+        json.dump(data, file, indent=4)
+    print(f"User inputs and checks have been saved to {os.path.join(os.path.dirname(config_path), 'user_inputs.json')}")
 
-def check_telegram_alert() -> None:
-    timestamp: str = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+def load_user_inputs():
+    try:
+        with open(os.path.join(os.path.dirname(config_path), 'user_inputs.json'), 'r') as file:
+            data = json.load(file)
+        return data["threads"], data["delay"], data["telegram_check"], data["email_check"]
+    except (FileNotFoundError, KeyError):
+        return None, None, None, None
+
+
+def check_telegram_alert() -> bool:
     value = input("Do You Want To Check If Telegram Alert Works Properly? [Y/n]  ")
-
-    if value.isalpha() and value == 'Y':
-        logger.info(f"[{timestamp}]  Action: Checking Telegram API...")
+    if value.isalpha() and value.lower() == 'y':
+        logger.info(f"Action: Checking Telegram API...")
         text = "Telegram Alert Service has been started ✅"
         (
             AmazonScraper("")
@@ -422,21 +430,19 @@ def check_telegram_alert() -> None:
                 text
             )
         )
-
-    elif value.isalpha() and value == 'n':
-        logger.info(f"[{timestamp}]  Action: Telegram API Check has been skipped")
-
+        return True
+    elif value.isalpha() and value.lower() == 'n':
+        logger.info(f"Action: Telegram API Check has been skipped")
+        return False
     else:
         logger.info("Invalid Input! try again.")
         return check_telegram_alert()
 
 
-def check_email_alert() -> None:
-    timestamp: str = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+def check_email_alert() -> bool:
     value = input("Do You Want To Check If Email Alert Works Properly? [Y/n]  ")
-
-    if value.isalpha() and value == 'Y':
-        logger.info(f"[{timestamp}]  Action: Checking Email Alert Service...")
+    if value.isalpha() and value.lower() == 'y':
+        logger.info(f"Action: Checking Email Alert Service...")
         text = "Email Alert Service has been started ✅"
         (
             AmazonScraper("")
@@ -449,10 +455,14 @@ def check_email_alert() -> None:
                 EMAIL_ADDRESSEE, text
             )
         )
-
-    elif value.isalpha() and value == 'n':
-        logger.info(f"[{timestamp}]  Action: Email Alert Service Check has been skipped")
-
+        return True
+    elif value.isalpha() and value.lower() == 'n':
+        logger.info(f"Action: Email Alert Service Check has been skipped")
+        return False
     else:
         logger.info("Invalid Input! try again.")
         return check_email_alert()
+
+
+def get_current_timestamp() -> str:
+    return datetime.now().strftime('%Y-%m-%d %H:%M:%S')
