@@ -5,6 +5,7 @@ import logging
 import re
 import smtplib
 import sys
+from datetime import datetime
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from typing import Tuple
@@ -447,3 +448,7 @@ def check_email_alert() -> None:
     else:
         logger.info("Invalid Input! try again.")
         return check_email_alert()
+
+
+def get_current_timestamp() -> str:
+    return datetime.now().strftime('%Y-%m-%d %H:%M:%S')

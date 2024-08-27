@@ -48,7 +48,6 @@ def main():
     check_telegram_alert()
     check_email_alert()
     input("Press ENTER to starting monitoring products")
-    timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     logger.info(f"Action: Ready!")
 
     while True:
@@ -56,7 +55,6 @@ def main():
         with concurrent.futures.ThreadPoolExecutor(max_workers=number_of_threads) as executor:
             executor.map(task, urls, price_targets, telegram_alerts_settings, email_alerts_settings)
             # parallelize product tasks using lists/dicts object as args
-        timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         logger.info(f"Tasks completed in: {int(time.time() - start_time)}")
         time.sleep(tasks_delay)  # delay between tasks
 
@@ -66,4 +64,4 @@ if __name__ == "__main__":
         main()
     except KeyboardInterrupt:
         logger.info("Exiting...")
-        exit()
+        exit(0)
