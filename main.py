@@ -19,7 +19,7 @@ from scripts.functions import (
     check_email_alert
 )
 
-formats = "[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s"
+formats = "[%(levelname) 4s/%(asctime)s] %(name)s: %(message)s"
 
 logger = logging.getLogger("AmazonPriceTracker")
 logger.setLevel(logging.INFO)
