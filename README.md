@@ -65,14 +65,14 @@ chmod +x setup.sh
 
 ## ⚙️ Configuration
 
-### settings.py
+### .env File
 
 This file is the main settings file.
 
-1️⃣ Open settings.py file using text editor or IDE and fill in all fields. (for Telegram alert you need to create a BOT
+1️⃣ Open .env file using text editor or IDE and fill in all fields. (for Telegram alert you need to create a BOT
 using @botfather)
 
-![Settings.py Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.1/images/settingsImage.png)
+![.env Configuration Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.2/images/env-configuration.png)
 
 ### ASIN.json
 
@@ -136,11 +136,11 @@ you via email or Telegram Bot message. (more features on the way).
 
 If Telegram message alert is enabled for that specific product, you will see this message on the console.
 
-![Telegram Alert Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.1/images/telegramalert_Image.png)
+![Telegram Alert Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.2/images/telegramalert_Image.png)
 
 And then you will receive your message directly in chat.
 
-![Telegram Message Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.1/images/telegrammessage_Image.png)
+![Telegram Message Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.2/images/telegram-message.png)
 
 ### Email Alert
 
@@ -150,7 +150,7 @@ If Email alert is enabled for that specific product, you will see this message o
 
 And then you will receive your message directly in your email client.
 
-![Email Message Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.1/images/email_Image.png)
+![Email Message Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.2/images/email-alert.png)
 
 ## 👨‍💻 Support and Updates
 
