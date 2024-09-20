@@ -6,15 +6,15 @@
 
 Multiplatform automated Amazon IT Price Tracker with several type of alerts and configurations
 
-## ⬆️ NEW UPDATE! V0.0.2 has been released!
+## ⬆️ NEW UPDATE! V0.1.0 BETA has been released!
 
-- Bug Fix
+- Huge Bug Fix
 
-- Up To 10% Improved Performance
+- Up To 2x Improved Performance Thanks to Multiprocessing and Asynchronous Implementation
 
-- Added Vendors And Ratings For Every Product
-
-- Added Alerts Testing Comand
+- New Ecosystem Based on Multi-User Telegram BOTs
+  
+- New SQLite Ultra Fast Database Instead of JSON
 
 ---
 
@@ -69,25 +69,11 @@ chmod +x setup.sh
 
 This file is the main settings file.
 
-1️⃣ Open .env file using text editor or IDE and fill in all fields. (for Telegram alert you need to create a BOT
-using @botfather)
+1️⃣ Open .env file using text editor or IDE and fill in all fields. (You need to create a BOT
+using @botfather and to use your univoque Telegram Chat ID)
 
 ![.env Configuration Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.2/images/env-configuration.png)
 
-### ASIN.json
-
-This file contains all the Amazon IT products informations
-
-1️⃣ Find Amazon IT product unique ASIN code and copy it.
-
-![Amazon IT ASIN Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.1/images/ASIN_Image.png)
-
-2️⃣ Choose a price below which you want to be notified, choose the notification method and fill in the JSON file as
-below.
-
-![JSON file Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.1/images/json_image.png)
-
-This is an example with 3 products but you can add up to 10.000 products!
 
 ## 🚀 Getting Started
 
@@ -100,32 +86,32 @@ python3 main.py
 
 ![Main Menu Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.1/images/mainmenu_Image.png)
 
-if you see this screen probably you are on the right way. Just configure two more options and we are ready!
+If you see this screen probably you are on the right way. Now, pressing any key, the script will test all the credentials 
+and configuration in the .env that you have filled in. It will be enough for just one not to be valid to prevent the program 
+from starting, so check carefully.
 
-### Threads Setting
+![Check Config Image]()
 
-In order to make several requests in parallel, this software has a multi-thread workflow. The more threads you enable,
-the more products you can monitor at the same time but
-also the more CPU, RAM and I/O you will consume. If you have very powerful hardware/internet bandiwdth and want to have
-the greatest performance from this software, my advice is
-to set the number of threads equal to the number of product that you have filled in. If you have like thousands of
-products and speed is not a problem, my advice is to set the number
-of threads equal to double the number of CPU cores that you have.
-![Thread Setting Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.1/images/threadsetting_image.png)
+### 🤖 Telegram BOT
 
-### Delay Time Setting
+Once the script has started, the messaging service via Telegram Bot will start. Reach your @ of your Telegram BOT and enter <code>/start</code>
 
-You can also configure the delay time in seconds between cycle of product monitoring tasks. My advice is that the
-perfect number is around 900 seconds.
-![Delay Setting Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.1/images/delaysetting_image.png)
+![Start Telegram BOT Image]()
 
-### Products Scraping
+This is a Telegram BOT capable of offering centralized control of product scraping! It can be used by hundreds of users simultaneously to monitor
+what they like best and be notified of personalized offers! Let's the integrated commands.
 
-Once you have configured all the previous settings, Amazon IT Price Tracker will start to monitoring products for you.
-Directly on the console you can see real-time information for every product:
-request time, title and actual price.
+![Telegram BOT Commands GIF]()
 
-![Product Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.1/images/product_Image.png)
+#### Monitor Command
+
+<code>/monitor</code> is used for entering a new product to your personal list and, in case it's not already present, also in the Database. Is very simple,
+you need only to enter the Amazon IT product's link.
+
+![Monitor Command GIF]()
+
+#### Delete Command
+
 
 ## 📉 Alerts
 
