@@ -106,11 +106,22 @@ what they like best and be notified of personalized offers! Let's the integrated
 #### Monitor Command
 
 <code>/monitor</code> is used for entering a new product to your personal list and, in case it's not already present, also in the Database. Is very simple,
-you need only to enter the Amazon IT product's link.
+you need only to enter the Amazon IT product's link or ASIN.
 
 ![Monitor Command GIF]()
 
 #### Delete Command
+
+<code>/delete</code> is used for deleting a product from your personal list. Also in this case you only need to enter the Amazon IT product's link or ASIN.
+
+![Delete Command GIF]()
+
+#### Summary Command
+
+<code>/summary</code> is used for visualyzing your personal actual monitor list. You be able to see all your monitored products with some information like 
+title, ASIN, last price, price target.
+
+#### Email Settings
 
 
 ## 📉 Alerts
