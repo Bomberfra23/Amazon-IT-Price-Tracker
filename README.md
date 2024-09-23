@@ -1,3 +1,6 @@
+![Banner](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.1.0/images/banner.jpg)
+Thanks to Riccardo Piras for logos and graphics
+
 <a href="https://docs.python.org/3.12/" target="_blank"><img src="https://badgen.net/badge/icon/Python 3.12 ?icon=pypi&label" ></a>
 <a href="https://docs.python.org/3.12/" target="_blank"><img src="https://badgen.net/static/License/GPL 3.0/orange" ></a>
 <a href="https://t.me/HwGroupTech" target="_blank"><img src="https://badgen.net/badge/icon/Telegram support?icon=telegram&label" ></a>
@@ -90,46 +93,43 @@ If you see this screen probably you are on the right way. Now, pressing any key,
 and configuration in the .env that you have filled in. It will be enough for just one not to be valid to prevent the program 
 from starting, so check carefully.
 
-![Check Config Image]()
+![Check Config Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.1.0/images/check_configuration.png)
 
 ### 🤖 Telegram BOT
 
 Once the script has started, the messaging service via Telegram Bot will start. Reach your @ of your Telegram BOT and enter <code>/start</code>
 
-![Start Telegram BOT Image]()
+![Start Telegram BOT Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.1.0/images/start_command.gif)
 
 This is a Telegram BOT capable of offering centralized control of product scraping! It can be used by hundreds of users simultaneously to monitor
 what they like best and be notified of personalized offers! Let's the integrated commands.
-
-![Telegram BOT Commands GIF]()
 
 #### Monitor Command
 
 <code>/monitor</code> is used for entering a new product to your personal list and, in case it's not already present, also in the Database. Is very simple,
 you need only to enter the Amazon IT product's link or ASIN.
 
-![Monitor Command GIF]()
+![Monitor Command GIF](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.1.0/images/monitor_command.gif)
 
 #### Delete Command
 
 <code>/delete</code> is used for deleting a product from your personal list. Also in this case you only need to enter the Amazon IT product's link or ASIN.
 
-![Delete Command GIF]()
+![Delete Command GIF](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.1.0/images/delete_command.gif)
 
 #### Summary Command
-
-![Summary Command GIF]()
 
 <code>/summary</code> is used for visualyzing your personal actual monitor list. You are able to see all your monitored products with some information like 
 title, ASIN, last price, price target.
 
+![Summary Command GIF](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.1.0/images/summary_command.gif)
+
 #### Email Settings
 
-![Menu settings Image]()
 
 Entering in the settings from the <code>/start</code> menu you can configure and enter your email in order to receive product alerts not only by Telegram message.
 
-![Email Configuration GIF]()
+![Email Configuration GIF](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.1.0/images/email_configuration.gif)
 
 
 ## 📉 Alerts
@@ -139,7 +139,7 @@ you via email or Telegram Bot message. (more features on the way).
 
 ### Telegram Alert
 
-![Telegram Alert GIF]()
+![Telegram Alert Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.1.0/images/telegram_message.jpg)
 
 You will receive your message directly by BOT's chat. The alert contains some important datas like product title, price drop ecc but also some analytics and shortcuts.
 
@@ -148,13 +148,13 @@ You will receive your message directly by BOT's chat. The alert contains some im
 
 If Email alert is enabled for that specific user, you will recive your message directly on your email
 
-![Email Alert Image]()
+![Email Alert Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.1.0/images/email_message.jpg)
 
 ## 📃 Logs
 
 Any action is constantly monitored and reported in the file <code>logs.log</code> where you can find actions divided into errors or info for a better debugging and troubleshooting.
 
-![Logs Image]()
+![Logs Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.1.0/images/file_log.png)
 
 
 ## 👨‍💻 Support and Updates
