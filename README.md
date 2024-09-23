@@ -32,7 +32,7 @@ For any concerns, please contact me on Telegram by clicking its icon. I will pro
 To install and use this script you need:
 
 - Python 3.x installed (recommended Python 3.12.4 or newer)
-- At least 30Mbps Download/Upload Internet Connection (recommended 100Mbps or higher), 1GB of RAM, Dual-Core CPU
+- At least 30Mbps Download/Upload Internet Connection (recommended 100Mbps or higher), 1GB of RAM (recommended 4GB or more), Dual-Core CPU
 
 ## 📥 Install
 
@@ -118,10 +118,18 @@ you need only to enter the Amazon IT product's link or ASIN.
 
 #### Summary Command
 
-<code>/summary</code> is used for visualyzing your personal actual monitor list. You be able to see all your monitored products with some information like 
+![Summary Command GIF]()
+
+<code>/summary</code> is used for visualyzing your personal actual monitor list. You are able to see all your monitored products with some information like 
 title, ASIN, last price, price target.
 
 #### Email Settings
+
+![Menu settings Image]()
+
+Entering in the settings from the <code>/start</code> menu you can configure and enter your email in order to receive product alerts not only by Telegram message.
+
+![Email Configuration GIF]()
 
 
 ## 📉 Alerts
@@ -131,23 +139,23 @@ you via email or Telegram Bot message. (more features on the way).
 
 ### Telegram Alert
 
-If Telegram message alert is enabled for that specific product, you will see this message on the console.
+![Telegram Alert GIF]()
 
-![Telegram Alert Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.2/images/telegramalert_Image.png)
+You will receive your message directly by BOT's chat. The alert contains some important datas like product title, price drop ecc but also some analytics and shortcuts.
 
-And then you will receive your message directly in chat.
-
-![Telegram Message Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.2/images/telegram-message.png)
 
 ### Email Alert
 
-If Email alert is enabled for that specific product, you will see this message on the console.
+If Email alert is enabled for that specific user, you will recive your message directly on your email
 
-![Email Alert Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.1/images/emailalert_Image.png)
+![Email Alert Image]()
 
-And then you will receive your message directly in your email client.
+## 📃 Logs
 
-![Email Message Image](https://github.com/Bomberfra23/Amazon-IT-Price-Tracker/blob/v0.0.2/images/email-alert.png)
+Any action is constantly monitored and reported in the file <code>logs.log</code> where you can find actions divided into errors or info for a better debugging and troubleshooting.
+
+![Logs Image]()
+
 
 ## 👨‍💻 Support and Updates
 
