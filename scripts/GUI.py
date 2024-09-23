@@ -1,4 +1,4 @@
-def generate_logo(version, author):
+def generate_logo(version: str, author: str) -> str:
     logo = f"""
                                             _____  _______   _____      _            _______             _             
      /\                                    |_   _|__   __| |  __ \\    (_)          |__   __|           | |            

@@ -1,6 +1,7 @@
 lxml
 random_user_agent
-urllib3
-cssselect
-python-dotenv
+httpx
+aiosqlite
 setuptools
+typing
+python-dotenv
