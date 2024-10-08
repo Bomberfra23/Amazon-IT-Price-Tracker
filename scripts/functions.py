@@ -14,6 +14,8 @@ from config.settings import MONITOR_PRODUCT_DELAY
 async def monitor_product(asin: str, client: Callable, parser: Callable, logger: Callable, processor: Callable, db: Callable, alert_manager: Callable) -> None:
 
     try:
+ 
+        await asyncio.sleep(random.randint(0,5)
         
         html_response = await client.make_request(method = "GET", url = f"https://amazon.it/dp/{asin}") # GET request with WebRequest class, returns HTTPResponse dataclass
         product_data = await parser.parse_product_data(html_response) # parsing HTTPResponse's content with ProductParser class, returns Amazonproduct dataclass
@@ -23,7 +25,7 @@ async def monitor_product(asin: str, client: Callable, parser: Callable, logger:
         if product_data.availability:
             logger.info(f"Object: {product_data.title} Status: Available Price: {product_data.current_price}€  Vendor: {product_data.vendor}  Rating: {product_data.rating}")
         else:
-            logger.info(f"Object: {product_data.title} Status: Out Of Stock / No Offer  Price: N/A  🚀 Vendor: {product_data.vendor}  Rating: {product_data.rating}")
+            logger.info(f"Object: {product_data.title} Status: Out Of Stock / No Offer  Price: N/A  Vendor: {product_data.vendor}  Rating: {product_data.rating}")
    
 
         # If the product is available, this block is assigned to notify all the user in the Database via Telegram or Email
